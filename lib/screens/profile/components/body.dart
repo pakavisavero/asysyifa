@@ -13,27 +13,42 @@ class Body extends StatelessWidget {
           ProfilePic(),
           SizedBox(height: 20),
           ProfileMenu(
-            text: "My Account",
+            text: "Profile",
             icon: "assets/icons/User Icon.svg",
             press: () => {},
           ),
           ProfileMenu(
-            text: "Notifications",
+            text: "Undang teman",
+            icon: "assets/icons/Invite.svg",
+            press: () {},
+          ),
+          ProfileMenu(
+            text: "Notifikasi",
             icon: "assets/icons/Bell.svg",
             press: () {},
           ),
           ProfileMenu(
-            text: "Settings",
+            text: "Kalender",
+            icon: "assets/icons/calender 2.svg",
+            press: () {},
+          ),
+          ProfileMenu(
+            text: "Pengaturan",
             icon: "assets/icons/Settings.svg",
             press: () {},
           ),
           ProfileMenu(
-            text: "Help Center",
+            text: "Bantuan",
             icon: "assets/icons/Question mark.svg",
             press: () {},
           ),
           ProfileMenu(
-            text: "Log Out",
+            text: "Lembar Persetujuan",
+            icon: "assets/icons/book.svg",
+            press: () {},
+          ),
+          ProfileMenu(
+            text: "Kaluar",
             icon: "assets/icons/Log out.svg",
             press: () {},
           ),

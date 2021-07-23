@@ -7,11 +7,11 @@ class Categories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> categories = [
-      {"icon": "assets/icons/Flash Icon.svg", "text": "Flash Deal"},
-      {"icon": "assets/icons/Bill Icon.svg", "text": "Bill"},
-      {"icon": "assets/icons/Game Icon.svg", "text": "Game"},
-      {"icon": "assets/icons/Gift Icon.svg", "text": "Daily Gift"},
-      {"icon": "assets/icons/Discover.svg", "text": "More"},
+      {"icon": "assets/icons/Super.svg", "text": "Keren!"},
+      {"icon": "assets/icons/Smile.svg", "text": "Baik"},
+      {"icon": "assets/icons/No Exp.svg", "text": "Biasa"},
+      {"icon": "assets/icons/sad.svg", "text": "Buruk"},
+      {"icon": "assets/icons/Cry.svg", "text": "Sangat buruk"},
     ];
     return Padding(
       padding: EdgeInsets.all(getProportionateScreenWidth(20)),
@@ -51,16 +51,16 @@ class CategoryCard extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              padding: EdgeInsets.all(getProportionateScreenWidth(15)),
+              padding: EdgeInsets.all(getProportionateScreenWidth(12)),
               height: getProportionateScreenWidth(55),
               width: getProportionateScreenWidth(55),
               decoration: BoxDecoration(
-                color: Color(0xFFFFECDF),
+                color: Color(0xFF3F20AF),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: SvgPicture.asset(icon),
             ),
-            SizedBox(height: 5),
+            SizedBox(height: 4),
             Text(text, textAlign: TextAlign.center)
           ],
         ),
