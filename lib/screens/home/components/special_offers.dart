@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/constants.dart';
 
 import '../../../size_config.dart';
 import 'section_title.dart';
@@ -44,6 +45,65 @@ class SpecialOffers extends StatelessWidget {
       ],
     );
   }
+}
+
+Container buildHelpCard(BuildContext context) {
+  return Container(
+    height: 150,
+    width: double.infinity,
+    child: Stack(
+      alignment: Alignment.bottomLeft,
+      children: <Widget>[
+        Container(
+          padding: EdgeInsets.only(
+            // left side padding is 40% of total width
+            left: MediaQuery.of(context).size.width * .4,
+            top: 20,
+            right: 20,
+          ),
+          height: 130,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color(0xFF60BE93),
+                Color(0xFF1B8D59),
+              ],
+            ),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: RichText(
+            text: TextSpan(
+              children: [
+                TextSpan(
+                  text: "Dial 999 for \nMedical Help!\n",
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline6
+                      .copyWith(color: Colors.white),
+                ),
+                TextSpan(
+                  text: "If any symptoms appear",
+                  style: TextStyle(
+                    color: Colors.white.withOpacity(0.7),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: Image.asset("assets/icons/nurse.svg"),
+        ),
+        Positioned(
+          top: 30,
+          right: 10,
+          child: Image.asset("assets/icons/nurse.svg"),
+        ),
+      ],
+    ),
+  );
 }
 
 class SpecialOfferCard extends StatelessWidget {
