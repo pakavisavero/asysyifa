@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/constants.dart';
-
+import 'package:shop_app/screens/timeline/fun_fact/funfact.dart';
+import 'package:shop_app/screens/timeline/infografis_kesehatan/infografis_kesehatan.dart';
 import '../../../size_config.dart';
 import 'section_title.dart';
 
@@ -30,13 +30,19 @@ class SpecialOffers extends StatelessWidget {
                 image: "assets/images/gambar 1.png",
                 category: "Fun Fact",
                 numOfBrands: 1,
-                press: () {},
+                press: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return FunFact();
+                  }));
+                },
               ),
               SpecialOfferCard(
                 image: "assets/images/gambar 2.png",
                 category: "Infografis Kesehatan",
                 numOfBrands: 1,
-                press: () {},
+                press: () {
+                  Navigator.pushNamed(context, InfografisKesehatan.routeName);
+                },
               ),
               SizedBox(width: getProportionateScreenWidth(20)),
             ],

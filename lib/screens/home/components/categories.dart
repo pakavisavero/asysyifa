@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shop_app/features/events/data/services/event_firestore_service.dart';
 
 import '../../../size_config.dart';
 
@@ -7,11 +8,31 @@ class Categories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> categories = [
-      {"icon": "assets/icons/Super.svg", "text": "Keren!"},
-      {"icon": "assets/icons/Smile.svg", "text": "Baik"},
-      {"icon": "assets/icons/No Exp.svg", "text": "Biasa"},
-      {"icon": "assets/icons/sad.svg", "text": "Buruk"},
-      {"icon": "assets/icons/Cry.svg", "text": "Sangat buruk"},
+      {
+        "icon": "assets/icons/super.svg",
+        "text": "Keren!",
+        "ket": "super.svg",
+      },
+      {
+        "icon": "assets/icons/smile.svg",
+        "text": "Baik",
+        "ket": "smile.svg",
+      },
+      {
+        "icon": "assets/icons/no_exp.svg",
+        "text": "Biasa",
+        "ket": "no_exp.svg",
+      },
+      {
+        "icon": "assets/icons/sad.svg",
+        "text": "Buruk",
+        "ket": "sad.svg",
+      },
+      {
+        "icon": "assets/icons/cry.svg",
+        "text": "Sangat buruk",
+        "ket": "cry.svg"
+      },
     ];
     return Padding(
       padding: EdgeInsets.all(getProportionateScreenWidth(20)),
@@ -23,7 +44,14 @@ class Categories extends StatelessWidget {
           (index) => CategoryCard(
             icon: categories[index]["icon"],
             text: categories[index]["text"],
-            press: () {},
+            press: () async {
+              await eventDBS.create({
+                "date": DateTime.now().millisecondsSinceEpoch,
+                "public": false,
+                "title": categories[index]["ket"],
+                "user_id": "icon",
+              });
+            },
           ),
         ),
       ),

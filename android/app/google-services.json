@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "425413974197",
+    "project_id": "asy-sy",
+    "storage_bucket": "asy-sy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:425413974197:android:cadda724e6d74b22d206fc",
+        "android_client_info": {
+          "package_name": "com.example.shop_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "425413974197-5k2bnpmlqv0rsq9anhaecfom5414j03h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDevTWo4x3I24Nw_lEfkMv-v1SJfar5tgY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "425413974197-5k2bnpmlqv0rsq9anhaecfom5414j03h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
