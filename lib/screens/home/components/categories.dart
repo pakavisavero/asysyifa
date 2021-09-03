@@ -1,12 +1,16 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shop_app/features/events/data/services/event_firestore_service.dart';
+import 'package:shop_app/screens/timeline/emoticon/details.dart';
 
 import '../../../size_config.dart';
 
 class Categories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    dynamic ref = FirebaseFirestore.instance.collection('event');
+
     List<Map<String, dynamic>> categories = [
       {
         "icon": "assets/icons/super.svg",
@@ -34,27 +38,80 @@ class Categories extends StatelessWidget {
         "ket": "cry.svg"
       },
     ];
+
+    List emotions = [
+      'super.svg',
+      'smile.svg',
+      'no_exp.svg',
+      'sad.svg',
+      'cry.svg',
+    ];
+
     return Padding(
       padding: EdgeInsets.all(getProportionateScreenWidth(20)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: List.generate(
-          categories.length,
-          (index) => CategoryCard(
-            icon: categories[index]["icon"],
-            text: categories[index]["text"],
-            press: () async {
-              await eventDBS.create({
-                "date": DateTime.now().millisecondsSinceEpoch,
-                "public": false,
-                "title": categories[index]["ket"],
-                "user_id": "icon",
-              });
-            },
-          ),
-        ),
-      ),
+      child: FutureBuilder<QuerySnapshot>(
+          future: ref.get(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              for (var i = 0; i < snapshot.data.docs.length; i++) {
+                Map data = snapshot.data.docs[i].data();
+                if (data['date'] == DateTime.now()) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: List.generate(
+                      categories.length,
+                      (index) {
+                        return CategoryCard(
+                          icon: categories[index]["icon"],
+                          text: categories[index]["text"],
+                          press: () async {
+                            await eventDBS.create(
+                              {
+                                "date": DateTime.now().millisecondsSinceEpoch,
+                                "public": false,
+                                "title": categories[index]["ket"],
+                                "user_id": "icon",
+                              },
+                            );
+
+                            Navigator.pushNamed(context, Details.routeName);
+                          },
+                        );
+                      },
+                    ),
+                  );
+                } else {
+                  return Container();
+                }
+              }
+            }
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: List.generate(
+                categories.length,
+                (index) {
+                  return CategoryCard(
+                    icon: categories[index]["icon"],
+                    text: categories[index]["text"],
+                    press: () async {
+                      await eventDBS.create(
+                        {
+                          "date": DateTime.now().millisecondsSinceEpoch,
+                          "public": false,
+                          "title": categories[index]["ket"],
+                          "user_id": "icon",
+                        },
+                      );
+
+                      Navigator.pushNamed(context, Details.routeName);
+                    },
+                  );
+                },
+              ),
+            );
+          }),
     );
   }
 }

@@ -52,6 +52,27 @@ class _EmoticonState extends State<Emoticon> {
     return _groupedEvents[date] ?? [];
   }
 
+  List emotions = [
+    ['super.svg', Colors.orange],
+    ['smile.svg', Colors.red],
+    ['no_exp.svg', Colors.blue],
+    ['sad.svg', Colors.green],
+    ['cry.svg', Colors.purple],
+  ];
+
+  checkEmotion(String emotion) {
+    String data = 'null';
+    int i = 0;
+    emotions.forEach((element) {
+      if (emotion == emotions[i][0]) {
+        data = 'assets/icons/$emotion';
+      }
+
+      i++;
+    });
+    return data;
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -78,7 +99,6 @@ class _EmoticonState extends State<Emoticon> {
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.hasData) {
               final events = snapshot.data;
-              print(events);
               _groupEvents(events);
               DateTime selectedDate = _selectedDay;
               final _selectedEvents = _groupedEvents[selectedDate] ?? [];
@@ -136,6 +156,7 @@ class _EmoticonState extends State<Emoticon> {
                       style: Theme.of(context).textTheme.headline6,
                     ),
                   ),
+                  SizedBox(height: 20),
                   ListView.builder(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
@@ -143,23 +164,32 @@ class _EmoticonState extends State<Emoticon> {
                     itemBuilder: (BuildContext context, int index) {
                       AppEvent event = _selectedEvents[index];
                       return ListTile(
-                        title: event.title == 'assets/icons/Super.svg'
-                            ? SvgPicture.asset('assets/icons/Super.svg')
-                            : Text(event.title),
+                        title: checkEmotion(event.title) != 'null'
+                            ? SvgPicture.asset(
+                                'assets/icons/' + event.title,
+                                height: 150,
+                                alignment: Alignment.centerLeft,
+                              )
+                            : Text(
+                                event.title,
+                              ),
                         // subtitle: Text(
                         //   DateFormat("EEEE, dd MMMM, yyyy").format(event.date),
                         // ),
-                        onTap: () => Navigator.pushNamed(
-                            context, AppRoutes.viewEvent,
-                            arguments: event),
-                        trailing: IconButton(
-                          icon: Icon(Icons.edit),
-                          onPressed: () => Navigator.pushNamed(
-                            context,
-                            AppRoutes.editEvent,
-                            arguments: event,
-                          ),
-                        ),
+                        onTap: () => checkEmotion(event.title) == 'null'
+                            ? Navigator.pushNamed(context, AppRoutes.viewEvent,
+                                arguments: event)
+                            : null,
+                        trailing: checkEmotion(event.title) != 'null'
+                            ? SizedBox()
+                            : IconButton(
+                                icon: Icon(Icons.edit),
+                                onPressed: () => Navigator.pushNamed(
+                                  context,
+                                  AppRoutes.editEvent,
+                                  arguments: event,
+                                ),
+                              ),
                       );
                     },
                   ),
